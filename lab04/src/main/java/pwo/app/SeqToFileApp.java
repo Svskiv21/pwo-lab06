@@ -2,11 +2,15 @@ package pwo.app;
 
 import pwo.seq.SeqType;
 import pwo.utils.SequenceTools;
-
-import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import java.nio.file.InvalidPathException;
 
-public class SeqToFileApp {
+/**
+ *
+ * @author student
+ */
+class SeqToFileApp {
+
     protected SeqType seqType = null;
     protected Integer from = null, to = null;
     protected String fileName = null;
@@ -25,11 +29,13 @@ public class SeqToFileApp {
         } catch (InvalidPathException ex) {
             return false;
         }
+
         return seqType != null && from >= 0 && to >= 0;
     }
 
     protected boolean writeSeq() {
         return SequenceTools.writeToFile(seqType.getGenerator(), from, to, fileName);
+
     }
 
     public void run(String[] args) {
@@ -39,13 +45,10 @@ public class SeqToFileApp {
             System.out.println("!Illegal arguments\n" + "Legal usage: seqName from to fileName");
             return;
         }
-
         if (!writeSeq()) {
             System.out.println("!Write to the file: " + fileName + " FAILED");
             return;
         }
-
         System.out.println("Results write to " + fileName);
-
     }
 }
